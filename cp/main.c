@@ -41,15 +41,8 @@ int main (int argc, char *argv[])
         return 1;
     }
     
-    if (fstat(fd2, &stat_dst) == -1) {
-        if (errno != ENOENT) {  // It's okay if destination doesn't exist
-            perror("fstat() error on destination");
-            close(fd1);
-            close(fd2);
-            return 1;
-        }
 
-    } else if (stat_src.st_dev == stat_dst.st_dev && 
+     else if (stat_src.st_dev == stat_dst.st_dev && 
                stat_src.st_ino == stat_dst.st_ino) {
         fprintf(stderr, "Error: '%s' and '%s' are the same file\n", argv[1], argv[2]);
         close(fd1);
