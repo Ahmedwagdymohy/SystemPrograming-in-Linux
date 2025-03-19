@@ -1,90 +1,89 @@
-# System programming under Linux
-## 1. Implementation of the basic commands of the Linux shell
-## 1. pwd 
+# Linux Shell Implementations
 
-This is a simple implementation of the `pwd` (Print Working Directory) command in Linux using C and system calls. prints the absolute path of the current working directory.
+This repository contains a collection of shell implementations with varying levels of complexity and features, demonstrating system programming concepts in Linux.
 
+## Repository Contents
 
-## Code Overview
+### 1. Femto Shell
+A minimal shell implementation that supports basic command execution:
+- Built-in `echo` command
+- `exit` command for termination
+- Error handling for invalid commands
 
-- **`getcwd()`**: The core function used to retrieve the current working directory. It stores the absolute path in the provided buffer.
-- **Error Handling**: If `getcwd()` fails, the program prints an error message using `perror()` and exits with a non-zero status.
+### 2. Pico Shell
+A more advanced shell that builds upon Femto Shell:
+- Built-in commands: `echo`, `pwd`, `cd`, and `exit`
+- External command execution using fork/exec
+- PATH resolution for commands
+- Dynamic memory allocation for argument handling
 
+### 3. Nano Shell
+A feature-rich shell that extends Pico Shell with variable support:
+- Variable assignment (`variable=value`)
+- Variable substitution (`$variable`)
+- Environment variable export with `export`
+- All features from Pico Shell
 
-## Output
-The program will print the absolute path of the current working directory to the terminal.
+### 4. Basic Linux Command Implementations
+Individual implementations of common Linux commands:
+- `pwd`: Print working directory
+- `cp`: Copy files
+- `mv`: Move files
+- `echo`: Display text
 
-## Error Handling
-If `getcwd()` fails (e.g., due to insufficient permissions), the program will print an error message and exit with a status code of `1`.
+## Technical Details
 
+### System Calls Used
+- `fork()`: Creates new processes
+- `exec()`: Executes programs
+- `wait()`: Waits for child processes
+- `chdir()`: Changes directories
+- `getcwd()`: Gets current working directory
+- `open()`, `read()`, `write()`: File operations
 
+### Memory Management
+- Dynamic allocation for command arguments
+- Variable storage with resizable arrays
+- Proper memory cleanup to prevent leaks
 
+### Process Management
+- Parent-child process relationships
+- Environment variable inheritance
+- Process creation and termination
 
+## Building and Running
 
-## 2. cp
-implementation of the cp (Copy) command in Linux using C and system calls. The program copies the contents of a source file to a destination file.
+Each shell implementation can be compiled separately:
 
+```bash
+# For Femto Shell
+gcc -o femto_shell Femto_Shell/main.c
 
-This is a simple implementation of the `cp` (Copy) command in Linux using C and system calls. The program copies the contents of a source file to a destination file.
+# For Pico Shell
+gcc -o pico_shell Pico_Shell/main.c
 
+# For Nano Shell
+gcc -o nano_shell Nano_Shell/main.c
+```
 
-## Code Overview
-- **`open()`**: Opens the source file in read-only mode and the destination file in write-only mode (creating it if it doesn't exist).
-- **`read()` and `write()`**: Reads data from the source file and writes it to the destination file.
-- **Error Handling**: Checks for errors during file operations and prints appropriate error messages.
-- **File Comparison**: Ensures the source and destination files are not the same to avoid data loss.
+## Learning Progression
 
+This repository demonstrates a progression in shell implementation complexity:
 
-## Output
-The program will copy the contents of the source file to the destination file. If the destination file does not exist, it will be created.
+1. **Femto Shell**: Basic command parsing and built-in commands
+2. **Pico Shell**: External command execution and directory navigation
+3. **Nano Shell**: Variable management and environment manipulation
 
-## Error Handling
-- If the source or destination file cannot be opened, an error message is printed.
-- If the source and destination files are the same, an error message is printed to prevent data loss.
-- Errors during reading or writing operations are also handled with appropriate error messages
+Each implementation builds upon the previous one, adding new features while maintaining the core functionality.
 
+## Documentation
 
+Each shell implementation has its own README file with detailed information:
+- Feature descriptions
+- Technical implementation details
+- Usage examples
+- Error handling
 
+## License
 
-## 3. mv
-simple implementation of the `mv` (Move) command in Linux using C and system calls. The program moves a file from a source location to a destination location by copying the file and then deleting the original.
-
-
-## Code Overview
-
-- **`open()`**: Opens the source file in read-only mode and the destination file in write-only mode (creating it if it doesn't exist).
-- **`read()` and `write()`**: Reads data from the source file and writes it to the destination file.
-- **`unlink()`**: Deletes the source file after a successful copy.
-- **Error Handling**: Checks for errors during file operations and prints appropriate error messages.
-- **File Comparison**: Ensures the source and destination files are not the same to avoid data loss.
-
-
-## Output
-The program will move the source file to the destination location. If the destination file already exists, it will be overwritten.
-
-## Error Handling
-- If the source or destination file cannot be opened, an error message is printed.
-- If the source and destination files are the same, an error message is printed to prevent data loss.
-- Errors during reading, writing, or deleting operations are also handled with appropriate error messages.
-
-
-## 4. echo
-
-
-This is a simple implementation of the `echo` command in Linux using C. The program prints the provided arguments to the standard output.
-
-## Code Overview
-
-- **Argument Handling**: The program checks if at least one argument is provided (excluding the program name).
-- **Loop Through Arguments**: Iterates through the provided arguments and prints them to the console.
-- **Error Handling**: If no arguments are provided, the program prints a usage message and exits with an error code.
-
-
-
-
-
-## Output
-The program will print the provided string(s) to the terminal, followed by a newline.
-
-## Error Handling
-- If no arguments are provided, the program prints a usage message and exits with a status code of `1`.
+[Your License Information Here]
