@@ -1,4 +1,11 @@
-// Creating a simple shell in C
+/**
+author: Ahmed Wagdy
+date: 19/3/2025
+description: A simple shell in C
+
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,12 +16,25 @@
 #define MAX_INPUT_SIZE 1024
 #define PROMPT "Pico shell> "
 
-// Function prototypes
+/****
+ *** Function prototypes
+ ***/
+
 char** parse_input(char* input, int* arg_count);
 int execute_builtin(char** args, int arg_count);
 int execute_external(char** args);
 void free_args(char** args, int arg_count);
 
+
+
+
+
+
+
+/**
+ * Main function
+ * 
+ */
 int main() {
     char input[MAX_INPUT_SIZE];
     char** args;
@@ -23,7 +43,7 @@ int main() {
     
     while (status) {
         
-        printf("%s", PROMPT);  // Display prompt
+        printf("%s", PROMPT);  // Display prompt "Pico shell>"
         fflush(stdout);
         
         
@@ -41,12 +61,16 @@ int main() {
         }
         
 
-        // Parse input into arguments
-        args = parse_input(input, &arg_count);
+        
+        args = parse_input(input, &arg_count); // Parse input into arguments
         if (args == NULL || arg_count == 0) {
             continue;
         }
         
+
+
+
+
         // Try to execute as built-in command
         if (!execute_builtin(args, arg_count)) {
             // If not a built-in, try to execute as external command
@@ -60,7 +84,27 @@ int main() {
     return 0;
 }
 
-// Parse input string into array of arguments
+
+
+
+
+
+/****
+ *** Functions implementation
+ ***/
+
+
+
+
+
+
+
+/*
+ - Function to parse the input string into an array of arguments
+ - It takes the input string and the number of arguments
+
+*/
+
 char** parse_input(char* input, int* arg_count) {
     char* token;
     char** args = NULL;
