@@ -86,8 +86,8 @@ int main() {
     init_var_table(&var_table);
     
     while (status) {
-        // Display prompt
-        printf("%s", PROMPT);
+        
+        printf("%s", PROMPT); //Displaying the prompt 
         fflush(stdout);
         
         // Read input
@@ -96,8 +96,8 @@ int main() {
             break;
         }
         
-        // Remove trailing newline
-        input[strcspn(input, "\n")] = '\0';
+        
+        input[strcspn(input, "\n")] = '\0'; // Remove trailing newline
         
         // Skip empty lines
         if (strlen(input) == 0) {
@@ -429,7 +429,7 @@ char** substitute_variables(char** args, int arg_count, VarTable *var_table, int
 
 
 /**
-The remaining function are imported from the PicoShell */
+The remaining functions are imported from the PicoShell */
 
 // Parse input string into array of arguments
 char** parse_input(char* input, int* arg_count) {
@@ -438,13 +438,20 @@ char** parse_input(char* input, int* arg_count) {
     int count = 0;
     int capacity = 10; // Initial capacity
     
-    // Allocate initial memory for arguments
-    args = malloc(capacity * sizeof(char*));
+
+
+    args = malloc(capacity * sizeof(char*));    // Allocate initial memory for arguments
     if (args == NULL) {
         perror("malloc failed");
         return NULL;
     }
     
+
+
+
+
+    
+
     // Tokenize input
     token = strtok(input, " ");
     while (token != NULL) {
@@ -488,6 +495,10 @@ char** parse_input(char* input, int* arg_count) {
     *arg_count = count;
     return args;
 }
+
+
+
+
 
 // Execute built-in commands
 int execute_builtin(char** args, int arg_count, VarTable *var_table) {
