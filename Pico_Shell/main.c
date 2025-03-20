@@ -16,13 +16,72 @@ description: A simple shell in C
 #define MAX_INPUT_SIZE 1024
 #define PROMPT "Pico shell> "
 
-/****
+
+/***
  *** Function prototypes
  ***/
 
+
+/**
+ * Parses a command line input string into an array of arguments
+ * 
+ * @param input     The input string to be parsed (null-terminated)
+ * @param arg_count Pointer to an integer where the number of parsed arguments will be stored
+ * 
+ * @return         A dynamically allocated array of strings (char**) containing the parsed arguments,
+ *                 with NULL as the last element. Returns NULL if memory allocation fails.
+ *                 The caller is responsible for freeing the memory using free_args().
+ * 
+ * Example:
+ *   Input: "ls -l /home"
+ *   Result: ["ls", "-l", "/home", NULL]
+ *   arg_count will be set to 3
+ */
 char** parse_input(char* input, int* arg_count);
+
+
+/**
+ * Executes a built-in command
+ * 
+ * @param args      Array of strings containing the command and its arguments
+ * @param arg_count Number of arguments in the args array
+ * 
+ * @return         1 if the command was executed successfully, 0 otherwise
+ * 
+ * Example:
+ *   Input: ["ls", "-l", "/home"]
+ *   Result: Executes "ls -l /home"
+ *   Returns 1
+ */
 int execute_builtin(char** args, int arg_count);
+
+/**
+ * Executes an external command
+ * 
+ * @param args Array of strings containing the command and its arguments
+ * 
+ * @return         1 if the command was executed successfully, 0 otherwise
+ * 
+ * Example:
+ *   Input: ["ls", "-l", "/home"]
+ *   Result: Executes "ls -l /home"
+ *   Returns 1
+ */
 int execute_external(char** args);
+
+
+
+/**
+ * Frees the memory allocated for an array of strings
+ * 
+ * @param args       Array of strings to be freed
+ * @param arg_count  Number of elements in the array
+ * 
+ * Example:
+ *   Input: ["ls", "-l", "/home"]
+ *   Result: Frees the memory allocated for the array
+ */
+
 void free_args(char** args, int arg_count);
 
 
